@@ -5,6 +5,9 @@ class Department(models.Model):
     """部门表"""
     title = models.CharField(verbose_name='标题', max_length=16)
 
+    def __str__(self):
+        return self.title
+
 class Admin(models.Model):
     """员工表"""
     username = models.CharField(verbose_name='用户名', max_length=32)

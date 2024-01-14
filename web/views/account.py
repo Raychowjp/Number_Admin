@@ -37,6 +37,7 @@ def login(request):
     pwd = form.cleaned_data["password"]
     from utils.encrypt import md5
     encrypt_password = md5(pwd)
+    print(encrypt_password)
     admin_object = models.Admin.objects.filter(username=form.cleaned_data["username"], password= encrypt_password).first()
     if not admin_object:
         return render(request, "login.html", {"form": form, "error":"用户名或密码错误"})
@@ -64,4 +65,9 @@ def img_code(request):
 
 
 def home(request):
-    return HttpResponse("home")
+    return render(request, "home.html")
+
+
+def logout(request):
+    request.session.clear()
+    return redirect("/login/")
